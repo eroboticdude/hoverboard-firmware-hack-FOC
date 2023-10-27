@@ -37,6 +37,7 @@
   #else
     #include "hd44780.h"
 #endif
+#endif
 
 void SystemClock_Config(void);
 
@@ -509,7 +510,8 @@ int main(void) {
             board_temp_deg_c);        // 8: for verifying board temperature calibration
         #endif
       }
-      #elif defined(OLED_DISPLAY)
+      #endif
+      #if defined(OLED_DISPLAY)
         if (main_loop_counter % 25 == 0) { // Send data periodically every 125 ms
           char tempstr[10];
           ssd1306_Fill(Black); //clear buffer
@@ -542,7 +544,6 @@ int main(void) {
           ssd1306_UpdateScreen();
         }
       #endif
-    #endif
 
     // ####### FEEDBACK SERIAL OUT #######
     #if defined(FEEDBACK_SERIAL_USART2) || defined(FEEDBACK_SERIAL_USART3)
